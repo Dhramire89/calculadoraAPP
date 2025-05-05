@@ -4,14 +4,35 @@ import { globalStyles } from "@/styles/global-styles";
 import ThemeText from "@/components/ThemeText";
 import CalculatorAppButton from "@/components/Calculatorbutton";
 import { Colors } from "@/constants/Colors";
+import { useCalculator } from "@/hooks/useCalculator";
 
 const CalculatorApp = () => {
+  const {
+    formula,
+    prevNumber,
+    buildNumber,
+    clean,
+    toggleSign,
+    deleteLastNumber,
+    divideOperation,
+    multiplyOperation,
+    addOperation,
+    subtractOperation,
+    calculateSubResult,
+    calculateResult,
+  } = useCalculator();
+
   return (
     <View style={globalStyles.CalculatorContainer}>
       {/* Resultados */}
       <View style={{ paddingHorizontal: 30, paddingBottom: 20 }}>
-        <ThemeText variants="h1">20 x 20 </ThemeText>
-        <ThemeText variants="h2">400 </ThemeText>
+        <ThemeText variants="h1">{formula} </ThemeText>
+
+        {formula === prevNumber ? (
+          <ThemeText variants="h2"> </ThemeText>
+        ) : (
+          <ThemeText variants="h2">{prevNumber} </ThemeText>
+        )}
       </View>
       {/* Botones primer fila */}
       <View style={globalStyles.row}>
@@ -19,24 +40,24 @@ const CalculatorApp = () => {
           color={Colors.lightGray}
           label="C"
           blackText
-          onPress={() => console.log("C")}
+          onPress={() => clean()}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="+/-"
           blackText
-          onPress={() => console.log("+/-")}
+          onPress={() => toggleSign()}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="del"
           blackText
-          onPress={() => console.log("del")}
+          onPress={() => deleteLastNumber()}
         />
         <CalculatorAppButton
           color={Colors.orange}
           label="÷"
-          onPress={() => console.log("÷")}
+          onPress={() => divideOperation()}
         />
       </View>
       {/* Botones segunda fila */}
@@ -45,24 +66,24 @@ const CalculatorApp = () => {
           color={Colors.lightGray}
           label="7"
           blackText
-          onPress={() => console.log("7")}
+          onPress={() => buildNumber("7")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="8"
           blackText
-          onPress={() => console.log("8")}
+          onPress={() => buildNumber("8")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="9"
           blackText
-          onPress={() => console.log("9")}
+          onPress={() => buildNumber("9")}
         />
         <CalculatorAppButton
           color={Colors.orange}
           label="X"
-          onPress={() => console.log("X")}
+          onPress={() => multiplyOperation()}
         />
       </View>
       {/* Botones tercera fila */}
@@ -71,24 +92,24 @@ const CalculatorApp = () => {
           color={Colors.lightGray}
           label="4"
           blackText
-          onPress={() => console.log("4")}
+          onPress={() => buildNumber("4")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="5"
           blackText
-          onPress={() => console.log("5")}
+          onPress={() => buildNumber("5")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="6"
           blackText
-          onPress={() => console.log("6")}
+          onPress={() => buildNumber("6")}
         />
         <CalculatorAppButton
           color={Colors.orange}
           label="-"
-          onPress={() => console.log("-")}
+          onPress={() => subtractOperation()}
         />
       </View>
       {}
@@ -97,24 +118,24 @@ const CalculatorApp = () => {
           color={Colors.lightGray}
           label="1"
           blackText
-          onPress={() => console.log("1")}
+          onPress={() => buildNumber("1")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="2"
           blackText
-          onPress={() => console.log("2")}
+          onPress={() => buildNumber("2")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="3"
           blackText
-          onPress={() => console.log("3")}
+          onPress={() => buildNumber("3")}
         />
         <CalculatorAppButton
           color={Colors.orange}
           label="+"
-          onPress={() => console.log("÷")}
+          onPress={() => addOperation()}
         />
       </View>
       {/* Botones cuarta fila */}
@@ -124,19 +145,19 @@ const CalculatorApp = () => {
           label="0"
           doblesize
           blackText
-          onPress={() => console.log("0")}
+          onPress={() => buildNumber("0")}
         />
         <CalculatorAppButton
           color={Colors.lightGray}
           label="."
           blackText
-          onPress={() => console.log(".")}
+          onPress={() => buildNumber(".")}
         />
 
         <CalculatorAppButton
           color={Colors.orange}
           label="="
-          onPress={() => console.log("=")}
+          onPress={() => calculateResult()}
         />
       </View>
     </View>
